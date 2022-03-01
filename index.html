@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,9 +12,29 @@
     <!-- CSS add -->
     <link rel="stylesheet" href="style.css">
 
+    <title>Mobile Phone BD</title>
+
 </head>
 
 <body>
+
+    <header class="container text-center text-success mt-4">
+        <h1>Mobile Phone BD</h1>
+    </header>
+
+    <!-- phone search area -->
+    <div class="input-group mb-3 mt-4 w-50 mx-auto">
+        <input id="search-field" type="text" class="form-control" placeholder="Search the mobile phone" aria-label="Recipient's username" aria-describedby="button-addon2" />
+        <button onclick="phoneSearch()" class="btn btn-outline-secondary" type="button" id="button-search">
+                Search
+        </button>
+    </div>
+
+    <!-- phone search result -->
+    <section class="container">
+        <div id="search-result" class="row row-cols-1 row-cols-md-3 row-cols-lg-3 g-5 mt-4">
+        </div>
+    </section>
 
 
     <!-- JavaScript add -->
