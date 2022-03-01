@@ -1,3 +1,4 @@
+// ----------------- phone search area ------------------
 const phoneSearch = () => {
     const searchField = document.getElementById("search-field").value;
 
@@ -8,16 +9,18 @@ const phoneSearch = () => {
         .then((res) => getMobilePhone(res.data));
 };
 
-// getMobilePhone(res.data[0])
+// ----------------- phone search result ------------------
 const getMobilePhone = (phone) => {
-    // console.log(phone.length);
-    // console.log(phone);
+    const phoneLength = phone.length;
+    console.log(phoneLength);
 
     const phoneResult = document.getElementById("search-result");
-    phone.forEach((phones) => {
-        const div = document.createElement("div");
-        div.classList.add("col");
-        div.innerHTML = `
+    phone.forEach((phones, index) => {
+        if (index < 20) {
+            console.log(index);
+            const div = document.createElement("div");
+            div.classList.add("col");
+            div.innerHTML = `
         <div class="card border p-2 text-center">
             <img src="${phones.image}" class="card-img-top" alt="...">
             <div class="card-body">
@@ -27,10 +30,12 @@ const getMobilePhone = (phone) => {
             </div>
         </div>
         `;
-        phoneResult.appendChild(div);
+            phoneResult.appendChild(div);
+        }
     });
 };
 
+// ------------------------ single phone details  ID link--------------------
 const loadPhoneDetails = (phoneId) => {
     const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
     fetch(url)
@@ -38,6 +43,7 @@ const loadPhoneDetails = (phoneId) => {
         .then((res) => displayPhonedetails(res.data));
 };
 
+// ------------------------ single phone details --------------------
 const displayPhonedetails = (phone) => {
     let text = "Sensors: ";
     const phoneDetail = document.getElementById("phone-details");
