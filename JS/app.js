@@ -53,7 +53,7 @@ const displayPhonedetails = (phone) => {
         <p class="card-text">${
           phone.releaseDate ? phone.releaseDate : "No Release Date Found"
         }</p>
-        <h6 class="card-title">Main Features</h6>
+        <h5 class="card-title text-success">Main Features</h5>
         <p class="card-text">Display Size: ${
           phone.mainFeatures.displaySize
             ? phone.mainFeatures.displaySize
@@ -72,9 +72,27 @@ const displayPhonedetails = (phone) => {
         }</p>
         <p class="card-text" id="demo">
         </p>
-        
-        <p class="card-text ">
-         </p>
+        <h5 class="card-title text-success">Others Features</h5>
+        <p class="card-text">Others: ${
+          phone.others.WLAN ? phone.others.WLAN : "Not Found WLAN"
+        }</p>
+        <p class="card-text">Bluetooth: ${
+          phone.others.Bluetooth
+            ? phone.others.Bluetooth
+            : "Not Found Bluetooth"
+        }</p>
+        <p class="card-text">GPS: ${
+          phone.others.GPS ? phone.others.GPS : "Not Found GPS"
+        }</p>
+        <p class="card-text">NFC: ${
+          phone.others.NFC ? phone.others.NFC : "Not Found NFC"
+        }</p>
+        <p class="card-text">Radio: ${
+          phone.others.Radio ? phone.others.Radio : "Not Found Radio"
+        }</p>
+        <p class="card-text">USB: ${
+          phone.others.USB ? phone.others.USB : "Not Found USB"
+        }</p>
     </div>
     `;
     phoneDetail.appendChild(div);
