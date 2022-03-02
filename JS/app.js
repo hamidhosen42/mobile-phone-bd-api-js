@@ -1,27 +1,62 @@
 // ----------------- phone search area ------------------
 const phoneSearch = () => {
-    const searchField = document.getElementById("search-field").value;
+    const searchField = document.getElementById("search-field");
+    const searchText = searchField.value.toLowerCase();
 
-    const url = `https://openapi.programming-hero.com/api/phones?search=${searchField}`;
+    // display spinner
+    toggleSpinner("block");
 
-    fetch(url)
-        .then((res) => res.json())
-        .then((res) => getMobilePhone(res.data));
+
+    // clear data
+    searchField.value = "";
+    if (searchText == "") {
+        alert("Please Search the Phone Item");
+        toggleSpinner("none");
+    } else if (searchText.length <= 2) {
+        alert("Search Item so sort. Please Search the full name");
+        toggleSpinner("none");
+    } else {
+        const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+
+        fetch(url)
+            .then((res) => res.json())
+            .then((res) => {
+                if (
+                    searchText === "apple" ||
+                    searchText === "app" ||
+                    searchText === "oppo" ||
+                    searchText === "opp" ||
+                    searchText === "samsung" ||
+                    searchText === "sam"
+                ) {
+                    document.getElementById("search-error").style.display =
+                        "none";
+                    getMobilePhone(res.data);
+                } else {
+                    document.getElementById("search-error").style.display = 'block';
+                }
+            });
+    }
 };
+
+// ----------------- spinner ------------------v
+const toggleSpinner = (displayStyle) => {
+    document.getElementById("spinner").style.display = displayStyle;
+};
+
+
 
 // ----------------- phone search result ------------------
 const getMobilePhone = (phone) => {
-    const phoneLength = phone.length;
-    console.log(phoneLength);
 
     const phoneResult = document.getElementById("search-result");
+    phoneResult.textContent = "";
     phone.forEach((phones, index) => {
         if (index < 20) {
-            console.log(index);
             const div = document.createElement("div");
             div.classList.add("col");
             div.innerHTML = `
-        <div class="card border p-2 text-center">
+        <div class="card border p-2 text-center shadow-lg">
             <img src="${phones.image}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">${phones.phone_name}</h5>
@@ -33,6 +68,7 @@ const getMobilePhone = (phone) => {
             phoneResult.appendChild(div);
         }
     });
+    toggleSpinner("none");
 };
 
 // ------------------------ single phone details  ID link--------------------
@@ -47,6 +83,7 @@ const loadPhoneDetails = (phoneId) => {
 const displayPhonedetails = (phone) => {
     let text = "Sensors: ";
     const phoneDetail = document.getElementById("phone-details");
+    phoneDetail.textContent = "";
     const div = document.createElement("div");
     div.classList.add("card");
     div.innerHTML = `
@@ -61,43 +98,43 @@ const displayPhonedetails = (phone) => {
         }</p>
         <h5 class="card-title text-success">Main Features</h5>
         <p class="card-text">Display Size: ${
-          phone.mainFeatures.displaySize
-            ? phone.mainFeatures.displaySize
+          phone?.mainFeatures?.displaySize
+            ? phone?.mainFeatures?.displaySize
             : "Not Found Display Size"
         }</p>
         <p class="card-text">Storage: ${
-          phone.mainFeatures.storage
-            ? phone.mainFeatures.storage
+          phone?.mainFeatures?.storage
+            ? phone?.mainFeatures?.storage
             : "Not Found Storage"
         }
         </p>
         <p class="card-text">Chip Set: ${
-          phone.mainFeatures.chipSet
-            ? phone.mainFeatures.chipSet
+          phone?.mainFeatures?.chipSet
+            ? phone?.mainFeatures?.chipSet
             : "Not Found Chip Set"
         }</p>
         <p class="card-text" id="demo">
         </p>
         <h5 class="card-title text-success">Others Features</h5>
-        <p class="card-text">Others: ${
-          phone.others.WLAN ? phone.others.WLAN : "Not Found WLAN"
+        <p class="card-text">WAN: ${
+          phone?.others?.WLAN ? phone?.others?.WLAN : "Not Found WAN"
         }</p>
         <p class="card-text">Bluetooth: ${
-          phone.others.Bluetooth
+          phone?.others?.Bluetooth
             ? phone.others.Bluetooth
             : "Not Found Bluetooth"
         }</p>
         <p class="card-text">GPS: ${
-          phone.others.GPS ? phone.others.GPS : "Not Found GPS"
+          phone?.others?.GPS ? phone?.others?.GPS : "Not Found GPS"
         }</p>
         <p class="card-text">NFC: ${
-          phone.others.NFC ? phone.others.NFC : "Not Found NFC"
+          phone?.others?.NFC ? phone?.others?.NFC : "Not Found NFC"
         }</p>
         <p class="card-text">Radio: ${
-          phone.others.Radio ? phone.others.Radio : "Not Found Radio"
+          phone?.others?.Radio ? phone?.others?.Radio : "Not Found Radio"
         }</p>
         <p class="card-text">USB: ${
-          phone.others.USB ? phone.others.USB : "Not Found USB"
+          phone?.others?.USB ? phone?.others?.USB : "Not Found USB"
         }</p>
     </div>
     `;
