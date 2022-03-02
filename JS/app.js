@@ -37,6 +37,9 @@ const phoneSearch = () => {
                 } else {
                     document.getElementById("search-error").style.display =
                         "block";
+                    const phoneResult =
+                        document.getElementById("search-result");
+                    phoneResult.textContent = "";
                 }
             });
     }
