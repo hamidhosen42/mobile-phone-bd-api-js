@@ -27,13 +27,16 @@ const phoneSearch = () => {
                     searchText === "oppo" ||
                     searchText === "opp" ||
                     searchText === "samsung" ||
-                    searchText === "sam"
+                    searchText === "sam" ||
+                    searchText === "huawei " ||
+                    searchText === "hua"
                 ) {
                     document.getElementById("search-error").style.display =
                         "none";
                     getMobilePhone(res.data);
                 } else {
-                    document.getElementById("search-error").style.display = 'block';
+                    document.getElementById("search-error").style.display =
+                        "block";
                 }
             });
     }
@@ -139,6 +142,7 @@ const displayPhonedetails = (phone) => {
     </div>
     `;
     phoneDetail.appendChild(div);
+
 
     for (let i = 0; i < phone.mainFeatures.sensors.length; i++) {
         if (i == 0) {
